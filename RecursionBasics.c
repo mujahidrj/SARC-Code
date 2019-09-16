@@ -11,6 +11,7 @@ int mult(int a, int b)
 }
 
 int main(void) {
-  int x;
+
+  printf("5 times 6 = %d"\n, mult(5,6));
   return 0;
 }
