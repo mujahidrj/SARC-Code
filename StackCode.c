@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
+/******************************************************/
+/*                      Stacks        	              */
+/******************************************************/
 typedef struct stack {
   int top;
   int size;
@@ -42,7 +46,71 @@ stack *freeTheStack(stack *stackWeWantToDelete)
   free(stackWeWantToDelete);
 
   return NULL;
+}
 
+void push(stack *s, int num)
+{
+  // if there's no stack
+  if(s == NULL)
+  {
+    printf("No stack here\n");
+    return;
+  }
+	// if the stack is full
+  if(isFull(s))
+  {
+    printf("Stack is full");
+    return;
+  }
+
+  s->top++;
+  s->elements[s->top] = num;
+  return;
+}
+
+int pop(stack *s) 
+{
+  if(s == NULL)
+  {
+    printf("No stack here\n");
+    return INT_MAX;     
+  }
+
+  // if the stack is empty
+  if(isEmpty(s))
+  {
+    printf("Stack is empty");
+    return INT_MIN;
+  }
+  
+  s->top--;
+  return s->elements[s->top + 1];
+}
+
+int peek(stack *s)
+{
+  if(isEmpty(s))
+  {
+    printf("Stack is empty\n");
+    return INT_MIN;
+  }
+  return s->elements[s->top];
+}
+
+int isFull(stack *s)
+{
+  if(s->top == s->size - 1)
+  {
+    return 1;
+  }
+  return 0;
+
+//  return (s->top == s->cap - 1);
+}
+
+int isEmpty(stack *s) 
+{
+  return (s->top == -1);
 }
 
 
