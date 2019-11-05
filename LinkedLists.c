@@ -88,6 +88,38 @@ node *nthInsert(node *head, int position, int data)
   return head;
 }
 
+// Given the head of a linked list, creates a node and inserts it after the node that contains num in it's value field
+node* insertAfter (node* head, int num, int data) {
+  node *temp1, *temp2;
+  temp2 = createNode(data);
+  
+  // Checking to see if we are passed a valid LL
+  if (head == NULL)
+  {
+    printf("Couldn't find %d\n", num);
+    return temp2;
+  }  
+
+  // Assigning head to temp so both temp and head point to the
+  // first node in the LL
+  temp1 = head;
+  
+  // Checking to see that we don't go past the end of the LL
+  while (temp1 != NULL) {
+    
+    // Finding the node that contains our num
+    if (temp1->value != num)   
+      temp1=temp1->next;
+
+    // Inserting node in it's correct position
+      temp2->next = temp1->next;
+			temp1->next = temp2;
+  }
+	
+  return head;
+}
+
+
 int main(void) {
   printf("Hello World\n");
   return 0;
