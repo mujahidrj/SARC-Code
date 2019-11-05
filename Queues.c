@@ -16,11 +16,10 @@ queue *createQueue(int size)
   return q;
 }
 
-
-void enQueue(int add_item){    
-  if (rear < MAX) {        
-    queue_array[rear] = add_item;        
-    rear = rear + 1;       
+void enQueue(queue* q, int add_item){    
+  if (q->rear < MAX) {        
+    q->array[q->rear] = add_item;        
+    q->rear = q->rear + 1;       
     printf("\nAdded to queue");    
     }    
   else {        
@@ -28,12 +27,12 @@ void enQueue(int add_item){
   }
 } 
 
-int deQueue() {    
-  if(front==rear)    
+int deQueue(queue* q) {    
+  if(q->front == q->rear)    
   { 
     printf("\n Empty");        
     return -9999;    
   }    
   else        
-   return queue_array[front++];
+   return q->array[q->front++];
 } 
