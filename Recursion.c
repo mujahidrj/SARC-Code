@@ -5,15 +5,16 @@
 // 2) Recursive call
 
 // Returns the sum of numbers 1 through n
-int sum_recursive(int n)
+int recursive_sum(int n)
 {
   if (n == 1)
     return 1;
 
-  return n + sum_recursive(n - 1);
+  return n + recursive_sum(n - 1);
 }
 
-int mult(int n)
+// Returns a number's factorial
+int fact(int n)
 {
    if (n == 0)
     return 0;
@@ -21,7 +22,7 @@ int mult(int n)
   if (n == 1)
     return 1;
 
-  return n * mult(n - 1);
+  return n * fact(n - 1);
 
 }
 
@@ -51,17 +52,6 @@ int find_max(int *array, int len)
   return max(array[len - 1], find_max(array, len - 1));
 
 }
-
-// Returns the fibonnaci number at the given index n
-int fib(int n)
-{
-  if (n == 0 || n == 1)
-    return 1;
-
-  return fib(n-2) + fib(n-1);
-}
-
-*/
 
 int main(void) {
 
