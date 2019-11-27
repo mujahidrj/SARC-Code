@@ -65,8 +65,7 @@ node *headInsert (node *head, int num)
 // Inserts node at Nth position and returns head of LL
 node *nthInsert(node *head, int position, int data)
 {
-  node *temp;
-	node* newNode;
+  node *temp, *newNode;
   newNode = createNode(data);
   int counter = 1;
   
