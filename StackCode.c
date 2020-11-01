@@ -1,123 +1,136 @@
+/********************************************/
+/*   Array based implementation of Stacks   */
+/********************************************/
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
+#include <limits.h>
 
-/******************************************************/
-/*                      Stacks        	              */
-/******************************************************/
-typedef struct stack {
+typedef struct stack
+{
   int top;
-  int size;
-  int *array;
+  int *arr;
+  int cap;
 } stack;
 
-stack *createStack(int capacity) {
-  stack *newStack;
-
-  // Dynamically allocate memory for 1 stack
-  newStack = malloc(sizeof(stack) * 1);
-  if ( newStack == NULL )
-  {
-    printf("No memory found\n");
+stack *createStack(int capacity)
+{
+  stack *newStack = malloc(sizeof(stack));
+  if (newStack == NULL)
     return NULL;
-  }
+
   newStack->top = -1;
-  newStack->size = capacity;
-
-  newStack->array = malloc(sizeof(int) * capacity);
-  if( newStack->array == NULL)
-  {
-    printf("No memory found for this array\n");
-    free(newStack);
+  newStack->arr = malloc(capacity * sizeof(int));
+  if (newStack->arr == NULL)
     return NULL;
-  }
+  newStack->cap = capacity;
 
   return newStack;
 }
 
-stack *freeTheStack(stack *stackWeWantToDelete)
+void freeStack(stack *s)
 {
-  if(stackWeWantToDelete == NULL)
-  {
-    printf("Ouch the stack's null\n");
-    return NULL;
-  }
-  free(stackWeWantToDelete->array);
-  free(stackWeWantToDelete);
-
-  return NULL;
-}
-
-void push(stack *s, int num)
-{
-  // if there's no stack
-  if(s == NULL)
-  {
-    printf("No stack here\n");
-    return;
-  }
-	// if the stack is full
-  if(isFull(s))
-  {
-    printf("Stack is full");
-    return;
-  }
-
-  s->top++;
-  s->elements[s->top] = num;
-  return;
-}
-
-int pop(stack *s) 
-{
-  if(s == NULL)
-  {
-    printf("No stack here\n");
-    return INT_MAX;     
-  }
-
-  // if the stack is empty
-  if(isEmpty(s))
-  {
-    printf("Stack is empty");
-    return INT_MIN;
-  }
-  
-  s->top--;
-  return s->elements[s->top + 1];
-}
-
-int peek(stack *s)
-{
-  if(isEmpty(s))
-  {
-    printf("Stack is empty\n");
-    return INT_MIN;
-  }
-  return s->elements[s->top];
+  free(s->arr);
+  free(s);
 }
 
 int isFull(stack *s)
 {
-  if(s->top == s->size - 1)
-  {
-    return 1;
-  }
-  return 0;
-
-//  return (s->top == s->cap - 1);
+  return s->top == s->cap - 1;
 }
 
-int isEmpty(stack *s) 
+int isEmpty(stack *s)
 {
-  return (s->top == -1);
+  return s->top == -1;
 }
 
+void push(stack *s, int item)
+{
+  if (s == NULL)
+  {
+    printf("NEED TO MAKE A STACK!!\n");
+    return;
+  }
 
-int main(void) {
-  stack *ptr;
-  ptr = createStack(100);
+  if (isFull(s))
+  {
+    printf("ITS FULL YOU CAN'T DO THAT!!\n");
+    return;
+  }
 
-  printf("Hello World\n");
+  s->top++;
+  s->arr[s->top] = item;
+}
+
+int pop(stack *s)
+{
+  if (s == NULL)
+  {
+    printf("No stack here!!");
+    return INT_MIN;
+  }
+
+  if (isEmpty(s))
+  {
+    printf("STACK IS EMPTY!\n");
+    return INT_MAX;
+  }
+
+  return s->arr[s->top--];
+}
+
+int peek(stack *s)
+{
+  if (s == NULL)
+  {
+    printf("No stack here!!");
+    return INT_MIN;
+  }
+
+  if (isEmpty(s))
+  {
+    printf("STACK IS EMPTY!\n");
+    return INT_MAX;
+  }
+
+  return s->arr[s->top];
+}
+
+// From Prof. Szumlanski
+void printStack(stack *s)
+{
+  int i;
+  printf("\n");
+  if (s == NULL)
+  {
+    printf("   (no stack)\n");
+    return;
+  }
+  if (isEmpty(s))
+  {
+    printf("   (stack is empty)\n");
+    return;
+  }
+  for (i = s->cap - 1; i >= 0; i--)
+  {
+    printf("   |  %-4d  |%s\n", s->arr[i], (i == s->top ? " <-- top" : ""));
+    printf("   +--------+\n");
+  }
+}
+
+int main(void)
+{
+  stack *s = createStack(4);
+  push(s, 5);
+  push(s, 6);
+  push(s, 7);
+  push(s, 8);
+  printStack(s);
+  printf("Popped Value: %d\n", pop(s));
+  printStack(s);
+  push(s, 9);
+  printStack(s);
+
+  freeStack(s);
+
   return 0;
 }
