@@ -117,7 +117,7 @@ int function10(int n)
   int i, j, k, counter;               // 1 time
   for (i = 0; i < n; i++)             // n times
     for (j = 0; j < n * n; j++)       // n*n times
-      for (k = 0; k < math.pow(2, n)) // 2^n
+      for (k = 0; k < pow(2, n); k++) // 2^n
         counter++;                    // n*n times
 
   return counter; // 1 time
