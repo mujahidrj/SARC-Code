@@ -6,9 +6,10 @@ int hash(int number)
   return number % 10;
 }
 
-int main(void) {
+int main(void)
+{
 
-	int x;
+  int x;
 
   hash(12);
   hash(5809);

@@ -1,6 +1,7 @@
 #include <stdio.h>
 
-typedef struct node {
+typedef struct node
+{
   int data;
   struct node *next;
 } node;
@@ -12,7 +13,7 @@ int searchLL(node *head, int number)
 
   if (head == NULL)
     return 0;
-  
+
   temp = head;
 
   // Traversing until temp = null
@@ -20,12 +21,13 @@ int searchLL(node *head, int number)
   {
     if (temp->data == number)
       return 1;
-    temp = temp->next;  
+    temp = temp->next;
   }
   return 0;
 }
 
-node* createNode(int num) {
+node *createNode(int num)
+{
   node *temp;
 
   temp = malloc(sizeof(node) * 1);
@@ -42,20 +44,20 @@ node *tailInsert(node *head, int num)
     return createNode(num);
 
   temp = head;
-  
-  // Finds last node in LL
-	while (temp->next != NULL)
-		temp = temp->next;
 
-	temp->next = createNode(num);
-	return head;	
+  // Finds last node in LL
+  while (temp->next != NULL)
+    temp = temp->next;
+
+  temp->next = createNode(num);
+  return head;
 }
 
 // Inserts node at head of LL and returns new head
-node *headInsert (node *head, int num) 
+node *headInsert(node *head, int num)
 {
-  node* newHead = createNode(num);
-	
+  node *newHead = createNode(num);
+
   if (head == NULL)
     return newHead;
 
@@ -68,17 +70,17 @@ node *nthInsert(node *head, int position, int data)
   node *temp, *newNode;
   newNode = createNode(data);
   int counter = 1;
-  
+
   if (head == NULL)
     return newNode;
 
   temp = head;
 
-  while(temp != NULL)
+  while (temp != NULL)
   {
-    if(counter + 1 == position)
+    if (counter + 1 == position)
     {
-      newNode->next=temp->next;
+      newNode->next = temp->next;
       temp->next = newNode;
     }
     temp = temp->next;
@@ -88,41 +90,40 @@ node *nthInsert(node *head, int position, int data)
 }
 
 // Given the head of a linked list, creates a node and inserts it after the node that contains num in it's value field
-node* insertAfter (node* head, int num, int data) {
+node *insertAfter(node *head, int num, int data)
+{
   node *temp1, *temp2;
   temp2 = createNode(data);
-  
+
   // Checking to see if we are passed a valid LL
   if (head == NULL)
   {
     printf("Couldn't find %d\n", num);
     return temp2;
-  }  
+  }
 
   // Assigning head to temp so both temp and head point to the
   // first node in the LL
   temp1 = head;
-  
+
   // Checking to see that we don't go past the end of the LL
-  while (temp1 != NULL) {
-    
+  while (temp1 != NULL)
+  {
+
     // Finding the node that contains our num
-    if (temp1->value != num)   
-      temp1=temp1->next;
+    if (temp1->data != num)
+      temp1 = temp1->next;
 
     // Inserting node in it's correct position
-      temp2->next = temp1->next;
-			temp1->next = temp2;
+    temp2->next = temp1->next;
+    temp1->next = temp2;
   }
-	
+
   return head;
 }
 
-
-int main(void) {
+int main(void)
+{
   printf("Hello World\n");
   return 0;
 }
-
-
-

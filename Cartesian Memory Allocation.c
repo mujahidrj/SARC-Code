@@ -17,22 +17,24 @@ Your function should return a pointer to the array that was created and
 initialized.
 */
 
-typedef struct CartPoint {
- int x;
- int y;
+typedef struct CartPoint
+{
+  int x;
+  int y;
 } CartPoint;
 
-CartPoint* createPoints(int numPoints) {
- int i;
+CartPoint *createPoints(int numPoints)
+{
+  int i;
 
-// arr->x == (*arr). 
-CartPoint *arr = malloc(numPoints * sizeof(CartPoint));
+  // arr->x == (*arr).
+  CartPoint *arr = malloc(numPoints * sizeof(CartPoint));
 
-  for ( i = 0; i < numPoints; i++)
+  for (i = 0; i < numPoints; i++)
   {
-    arr[i].x = rand()%11;
-    arr[i].y = rand()%11;
+    arr[i].x = rand() % 11;
+    arr[i].y = rand() % 11;
   }
- 
- return arr;
+
+  return arr;
 }

@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct node {
+typedef struct node
+{
   int data;
   struct node *left, *right;
 } node;
@@ -33,7 +34,7 @@ node *insert_BST(node *root, int data)
 
 void print_preorder(node *root)
 {
-  if(root == NULL)
+  if (root == NULL)
     return;
 
   printf("%d ", root->data);
@@ -43,7 +44,7 @@ void print_preorder(node *root)
 
 void inorder(node *root)
 {
-  if(root == NULL)
+  if (root == NULL)
   {
     return;
   }
@@ -65,17 +66,16 @@ int searchBT(node *root, int n)
 int searchBST(node *root, int n)
 {
   if (root == NULL)
-   return 0;
+    return 0;
 
   if (root->data == n)
-   return 1;
+    return 1;
 
   if (n < root->data)
-   return searchBST(root->left, n) ;
+    return searchBST(root->left, n);
 
   if (n > root->data)
-   return searchBST(root->right, n);
-
+    return searchBST(root->right, n);
 }
 
 // MLR
