@@ -148,7 +148,6 @@ void deleteEven(node *head)
   }
 }
 
-// done
 void markEven(node *head)
 {
   /*
@@ -179,7 +178,6 @@ void markEven(node *head)
   }
 }
 
-// done
 // Given the head of a linked list, creates a node and inserts it after the node that contains num in it's value field
 void insertAfter(node *head, int num, int data)
 {
@@ -201,7 +199,6 @@ void insertAfter(node *head, int num, int data)
   }
 }
 
-// done
 // Write a function that takes a sorted linked list and an element to be inserted into that linked list, and inserts the element in sorted order. The function signature is:
 void insert_sorted(node *head, int n)
 {
@@ -228,7 +225,55 @@ void freeRec(node *head)
   free(head);
 }
 
-// done
+/*
+Let's represent an integer in a linked list format by having each node represent a digit in the number. The nodes make up the number in reversed order.
+
+For example, the following linked list:
+
+1 -> 2 -> 3 -> 4 -> 5
+is the number 54321.
+
+Given two linked lists in this format, return their sum in the same linked list format.
+
+For example, given
+
+9 -> 9
+5 -> 2
+return 124 (99 + 25) as:
+
+4 -> 2 -> 1
+*/
+
+int getValue(node *head)
+{
+  if (head == NULL)
+    return 0;
+  return head->data + 10 * getValue(head->next);
+}
+
+node *createLLFromNumber(int num)
+{
+  node *head = createNode(num % 10);
+  node *temp = head;
+  num /= 10;
+  while (num > 0)
+  {
+    temp->next = createNode(num % 10);
+    temp = temp->next;
+    num /= 10;
+  }
+  return head;
+}
+
+node *sumLL(node *a, node *b)
+{
+  int valA = getValue(a);
+  int valB = getValue(b);
+  int sum = valA + valB;
+  node *head = createLLFromNumber(sum);
+  return head;
+}
+
 // Write a recursive function that prints a linked list in reverse order. The function signature is:
 void print_reverse(node *head)
 {
